@@ -1,24 +1,73 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## users テーブル
 
-Things you may want to cover:
+| Column           | Type    | Options                   |
+| ---------------- | ------  | ------------------------- |
+| nickname         | string  | null: false               |
+| email            | string  | null: false               | 
+| password         | string  | null: false, unique: true |
+| last_name        | string  | null: false               |
+| family_name      | string  | null: false               |
+| kana_last_name   | string  | null: false               |
+| kana_family_name | string  | null: false               |
+| year             | integer | null: false               |
+| month            | integer | null: false               |
+| day              | integer | null: false               |
 
-* Ruby version
+### Association
 
-* System dependencies
+- has_many : items
+- has_many : records
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| image            |            | null: false                    |
+| item_name        | string     | null: false                    | 
+| explanation      | text       | null: false                    | 
+| category         | string     | null: false                    |
+| status           | string     | null: false                    |
+| delivery_burden  | string     | null: false                    |
+| area             | string     | null: false                    |
+| days             | string     | null: false                    |
+| price            | integer    | null: false                    |
+| user             | references | null: false, foreign_key: true |
+| record           | references | null: false, foreign_key: true |
 
-* Database initialization
+### Association
 
-* How to run the test suite
+- belongs_to : user
+- has_one    : record
 
-* Services (job queues, cache servers, search engines, etc.)
+## records テーブル
 
-* Deployment instructions
+| Column  | Type       | Options                        |
+| ------- | ---------- | ------------------------------ |
+| user    | references | null: false, foreign_key: true |
+| item    | references | null: false, foreign_key: true |
+| address | references | null: false, foreign_key: true |
 
-* ...
+
+### Association
+
+- belongs_to : item
+- belongs_to : user
+- belongs_to : address
+
+## addresses テーブル
+
+| Column           | Type       | Options                        |
+| ---------------- | ---------- | ------------------------------ |
+| postal_code      | integer    | null: false                    |
+| prefecture       | string     | null: false                    | 
+| city             | string     | null: false                    | 
+| line_1           | integer    | null: false                    |
+| line_2           | string     |                                |
+| phone            | integer    | null: false                    |
+| record           | references | null: false, foreign_key: true |
+
+### Association
+
+- has_many : records
