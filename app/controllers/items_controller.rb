@@ -1,9 +1,9 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!, :except [:indec, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
   def index
-    @items = Item.all.order(created_at: :desc)
+    @items = Item.order(created_at: :desc)
   end
 
   def new
@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   end
 
   def user_check
-    unless current_user.id == @item.user_id
+    if @item.order.present? || current_user.id != @item.user_id
       redirect_to root_path
     end
   end
