@@ -44,11 +44,11 @@ class ItemsController < ApplicationController
   end
 
   def item_find
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:id]).includes(:order)
   end
 
   def user_check
-    unless current_user.id == @item.user_id
+    unless @item.order.blank? && current_user.id == @item.user_id
       redirect_to root_path
     end
   end

@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :authenticate_user!,:item_find
+  before_action :authenticate_user!,:item_find,:user_check
 
   def index
     @order_address = OrderAddress.new
@@ -27,11 +27,17 @@ class OrdersController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_243ec528f62b15597d19cda5" 
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
     Payjp::Charge.create(
       amount: @item.price,  
       card: order_params[:token],  
       currency: 'jpy'             
     )
+  end
+
+  def user_check
+    unless @item.order.blank? && current_user.id == @item.user_id
+      redirect_to root_path
+    end
   end
 end
