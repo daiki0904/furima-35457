@@ -90,6 +90,16 @@ RSpec.describe OrderAddress, type: :model do
         @order_address.phone = '０８０１１１１２２２２'
         error_mess("Phone is invalid")
       end
+
+      it 'user_idが存在しない' do
+        @order_address.user_id = ''
+        error_mess("User can't be blank")
+      end
+
+      it 'item_idが存在しない' do
+        @order_address.item_id = ''
+        error_mess("Item can't be blank")
+      end
     end
   end
 end
