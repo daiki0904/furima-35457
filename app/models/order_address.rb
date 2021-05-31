@@ -6,7 +6,7 @@ class OrderAddress
     validates :postal_code, format:{with:/\A\d{3}[-]\d{4}\z/}
     validates :city
     validates :house_number
-    validates :phone
+    validates :phone, format:{with:/\A\d{10,11}\z/}
     validates :user_id
     validates :item_id
     validates :token
