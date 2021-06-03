@@ -5,6 +5,9 @@ document.addEventListener('DOMContentLoaded',function(){
     const createImageHTML = (blob) => {
       const ImageElement = document.createElement('div');
       const blobImage = document.createElement('img');
+      blobImage.width = 400;
+      blobImage.height = 300;
+
       blobImage.setAttribute('src', blob);
 
       ImageElement.appendChild(blobImage);
