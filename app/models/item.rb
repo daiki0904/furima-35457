@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one :order
-  has_one_attached :image
+  has_many_attached :images
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
   belongs_to :prefecture
@@ -10,7 +10,7 @@ class Item < ApplicationRecord
   belongs_to :status
 
   with_options presence: true do
-    validates :image
+    validates :images
     validates :item_name
     validates :information
     validates :price, format: { with: /\A[0-9]+\z/ },
