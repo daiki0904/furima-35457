@@ -22,7 +22,8 @@ class ItemsTag
 
   def save
     item = Item.create( item_name: item_name, information: information, category_id: category_id, status_id: status_id, shipping_fee_id: shipping_fee_id, prefecture_id: prefecture_id, schedule_id: schedule_id, price: price, user_id: user_id, image: image)
-    tag = Tag.create(name: name)
+    tag = Tag.where(name: name).first_or_initialize
+    tag.save
 
     ItemTagRelation.create(item_id: item.id, tag_id: tag.id)
   end

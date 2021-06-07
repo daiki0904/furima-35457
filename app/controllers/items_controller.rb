@@ -38,6 +38,12 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to root_path
   end
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
   private
 
   def item_params
