@@ -120,7 +120,9 @@
     <div class="tag-field", id='tag-field'>
       
       <%= f.label :name, "タグ" %>
-      ＃<%= f.text_field :name, class:"input-tag" %>
+      <%= f.text_field :name, class:"input-tag", autocomplete: 'off' %>
+      <div id="search-result">
+      </div>
     </div>
     <%# /タグ入力%>
 
