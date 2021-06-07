@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   belongs_to :user
   has_one :order
+  has_many :item_tag_relations
+  has_many :tags, through: :item_tag_relations
   has_many_attached :images
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
@@ -15,6 +17,7 @@ class Item < ApplicationRecord
     validates :information
     validates :price, format: { with: /\A[0-9]+\z/ },
                       numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
+    validates :user_id
   end
   with_options numericality: { other_than: 1 } do
     validates :category_id

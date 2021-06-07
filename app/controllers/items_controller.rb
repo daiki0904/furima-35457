@@ -8,12 +8,20 @@ class ItemsController < ApplicationController
 
   def new
     @item = Item.new
+    @itemtag = ItemsTag.new
   end
 
   def create
     @item = Item.new(item_params)
-    if @item.save
-      redirect_to root_path
+    if @item.valid? 
+      @item.save
+      @itemtag = ItemsTag.new(tag_params)
+      if @itemtag.valid?
+        @itemtag.save
+        redirect_to root_path
+      else
+        render :new
+      end
     else
       render :new
     end
@@ -37,6 +45,12 @@ class ItemsController < ApplicationController
     @item.destroy
     redirect_to root_path
   end
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
+    render json:{ keyword: tag }
+  end
   private
 
   def item_params
@@ -45,6 +59,10 @@ class ItemsController < ApplicationController
 
   def item_find
     @item = Item.find(params[:id])
+  end
+
+  def tag_params
+    params.require(:item).permit(:name).merge(item_id: @item.id)
   end
 
   def user_check

@@ -116,6 +116,16 @@
     </div>
     <%# /販売価格 %>
 
+    <%# タグ入力%>
+    <div class="tag-field", id='tag-field'>
+      
+      <%= f.label :name, "タグ" %>
+      <%= f.text_field :name, class:"input-tag", autocomplete: 'off' %>
+      <div id="search-result">
+      </div>
+    </div>
+    <%# /タグ入力%>
+
     <%# 注意書き %>
     <div class="caution">
       <p class="sentence">
