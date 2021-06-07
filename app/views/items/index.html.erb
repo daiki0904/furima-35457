@@ -152,6 +152,11 @@
                 <span class='star-count'>0</span>
               </div>
             </div>
+            <div class='item-tag'>
+              <% item.tags.each do |tag| %>
+                ＃<%= tag.name %>
+              <% end %>
+            </div>
           </div>
           <% end %>
         </li>
