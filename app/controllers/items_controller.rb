@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
+  before_action :retrieve_item, only: [:retrieve, :result]
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -51,6 +52,15 @@ class ItemsController < ApplicationController
     tag = Tag.where(['name LIKE ?', "%#{params[:keyword]}%"] )
     render json:{ keyword: tag }
   end
+
+  def retrieve
+    @items = Item.order(created_at: :desc)
+  end
+
+  def result
+    @results = @p.result.includes(:category)
+  end
+
   private
 
   def item_params
@@ -69,5 +79,9 @@ class ItemsController < ApplicationController
     if @item.order.present? || current_user.id != @item.user_id
       redirect_to root_path
     end
+  end
+
+  def retrieve_item
+    @p = Item.ransack(params[:q])
   end
 end
