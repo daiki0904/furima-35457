@@ -1,0 +1,6 @@
+.item-all{
+  background-color: #FFF;
+  display: flex;
+  flex-direction: column;
+  padding: 10vh 0;
+}

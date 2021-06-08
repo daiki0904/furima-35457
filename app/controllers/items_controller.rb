@@ -58,7 +58,7 @@ class ItemsController < ApplicationController
   end
 
   def result
-    @results = @p.result.includes(:category)
+    @results = @p.result
   end
 
   private
