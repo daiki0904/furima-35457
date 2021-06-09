@@ -1,33 +1,5 @@
 <%= render "shared/header" %>
-
-<h1>
-  絞り込み商品検索
-</h1>
-<%= search_form_for @p, url: result_items_path do |f| %>
-  <%= f.label :item_name_or_information_cont, '商品の名前、説明から検索'%>
-  <%= f.text_field :item_name_or_information_cont %>
-  <br>
-  <%= f.label :category_id_eq, 'カテゴリー' %>
-  <%= f.collection_select :category_id_eq, Category.where.not(id:1) , :id, :name, include_blank: '指定なし'%>
-  <br>
-  <%= f.label :status_id_eq, '商品の状態' %>
-  <%= f.collection_select :status_id_eq, Status.where.not(id:1) , :id, :name, include_blank: '指定なし'%>
-  <br>
-  <%= f.label :shipping_fee_id_eq, '配送料の負担' %>
-  <%= f.collection_select :shipping_fee_id_eq, ShippingFee.where.not(id:1) , :id, :name, include_blank: '指定なし'%>
-  <br>
-  <%= f.label :schedule_id_eq, '配送までの日数' %>
-  <%= f.collection_select :schedule_id_eq, Schedule.where.not(id:1) , :id, :name, include_blank: '指定なし'%>
-  <br>
-  <%= f.label :price_gteq, "価格" %>
-  <%= f.number_field :price_gteq %>
-  <%= f.label :price_lteq, " ~ " %>
-  <%= f.number_field :price_lteq %>
-  <br>
-  <%= link_to '検索条件をクリア', request.path %>
-  <br>
-  <%= f.submit '検索' %>
-<% end %>
+<%= render "shared/retrieve"%>
 
 <h1>
   検索結果

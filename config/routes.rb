@@ -9,4 +9,5 @@ Rails.application.routes.draw do
     end
     resources :orders, only: [:index, :create]
   end
+  get 'hashtag/:id' => 'items#hashtag', as: 'items_hashtag'
 end

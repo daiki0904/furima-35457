@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :item_find, only: [:show, :edit, :update, :destroy]
   before_action :user_check, only: [:edit, :update, :destroy]
-  before_action :retrieve_item, only: [:retrieve, :result]
+  before_action :retrieve_item, except: [:destroy]
   def index
     @items = Item.order(created_at: :desc)
   end
@@ -59,6 +59,11 @@ class ItemsController < ApplicationController
 
   def result
     @results = @p.result
+  end
+
+  def hashtag
+    @tag = Tag.find(params[:id])
+    @items = @tag.items
   end
 
   private
