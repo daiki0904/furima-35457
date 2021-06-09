@@ -38,6 +38,12 @@
     <div class="item-explain-box">
       <span><%= @item.information %></span>
     </div>
+    <div class='item-tag'>
+      <% @item.tags.each do |tag| %>
+        ＃<%= link_to "#{tag.name}", items_hashtag_path(tag.id) %>
+      <% end %>
+    </div>
+    <br>
     <table class="detail-table">
       <tbody>
         <tr>
