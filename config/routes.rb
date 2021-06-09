@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       get 'search'
       get 'retrieve'
       get 'result'
+      get 'tagcheck'
+      get 'checkresult'
     end
     resources :orders, only: [:index, :create]
   end

@@ -1,0 +1,31 @@
+<%= render "shared/header" %>
+
+<h1>
+【タグ候補検索用】
+</h1>
+
+<%= form_with  url: checkresult_items_path(tag.id) , method: :get, local: true do |f| %>
+  <%= f.text_field :name, class:"input-tag", placeholder: "タグから検索できます",autocomplete: 'off' %>
+  <div id="search-result">
+  </div>
+  <br>
+  <%= f.submit "検索" ,class:"tag-check" %>
+  <%=link_to 'もどる', root_path, class:"back-btnn" %>
+<% end %>
+<br>
+<br>
+<h2>
+タグの一覧
+</h2>
+<% @tags.each do |tag| %>
+  ＃<%= link_to "#{tag.name}", items_hashtag_path(tag.id) %>
+<% end %>
+
+<br>
+<br>
+<br>
+<%= link_to 'トップページへ戻る', root_path %>
+<br>
+<%= link_to '絞り込み検索', retrieve_items_path %>
+<br>
+<%= render "shared/footer" %>

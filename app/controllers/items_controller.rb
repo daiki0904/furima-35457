@@ -66,6 +66,23 @@ class ItemsController < ApplicationController
     @items = @tag.items
   end
 
+  def tagcheck
+    @tags = Tag.all
+  end
+
+  def checkresult
+    unless params[:name].present? || params[:name] == nil
+      redirect_to tagcheck_items_path
+    else
+      @tag = Tag.find_by(name: params[:name])
+      if @tag == nil
+        redirect_to tagcheck_items_path
+      else
+        @items = @tag.items
+      end
+    end
+  end
+
   private
 
   def item_params
